@@ -24,13 +24,10 @@ df = pd.read_csv('youth_smoking_drug_data_10000_rows_expanded.csv')
 # Check for missing values in the dataset
 #print("\nMissing values:\n", df.isnull().sum())
 
-
-# Data Visualization
-
-
+# Print the dataframe to verify loading
 print(df)
 
-# Data Preprocessing 
+# Data Preprocessing
 
 # Encoding categorical variables with text values before scaling
 label_encoder = LabelEncoder()
@@ -49,13 +46,12 @@ df[['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status']] = sca
 # Print first few rows to check transformations
 print(df.head())
 
-#EDA 
+# Data Visualization (from the previous code)
 
-
+# Box Plot for Smoking Prevalence by Age Group
 sns.boxplot(x='Age_Group', y='Smoking_Prevalence', data=df)
 plt.title("Smoking Prevalence by Age Group")
 plt.show()
-
 
 # Convert 'Yes'/'No' columns to 1/0
 df = df.replace({'Yes': 1, 'No': 0})
@@ -63,11 +59,16 @@ df = df.replace({'Yes': 1, 'No': 0})
 # Check if all columns are numeric
 print(df.dtypes)
 
-# Now, create the heatmap
+# Heatmap for Correlation
 sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Heatmap")
 plt.show()
 
+# Scatter Plot for Peer Influence vs Drug Experimentation by Gender
 sns.scatterplot(x='Peer_Influence', y='Drug_Experimentation', hue='Gender', data=df)
 plt.title("Peer Influence vs Drug Experimentation")
 plt.show()
+
+# Proceed with model training or further analysis after this section
+
 

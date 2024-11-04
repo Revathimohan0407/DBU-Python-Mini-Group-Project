@@ -82,3 +82,14 @@ print("Decision Tree Accuracy:", accuracy_score(y_test, y_pred_dt))
 
 print(df)
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+>>>>>>> Stashed changes
+
+
+print(df)
+>>>>>>> Stashed changes

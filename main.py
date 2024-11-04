@@ -8,6 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import roc_auc_score, matthews_corrcoef, classification_report, confusion_matrix
 import seaborn as sns
+import os
 
 # Load the dataset
 # Make sure the dataset is in the same directory or provide the full path to the dataset

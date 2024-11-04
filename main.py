@@ -3,11 +3,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import roc_auc_score, matthews_corrcoef
+from sklearn.metrics import roc_auc_score, matthews_corrcoef, classification_report, confusion_matrix
 import seaborn as sns
-import os
 
 # Load the dataset
 # Make sure the dataset is in the same directory or provide the full path to the dataset
@@ -60,17 +60,16 @@ print("\nNormalized Training Data (first 5 rows):")
 print(pd.DataFrame(X_train_normalized, columns=X.columns).head())
 
 
-
 # Machine Learning: Decision Tree
 # Create and train the Decision Tree model on the training data
 dt_model = DecisionTreeClassifier(random_state=42)
 dt_model.fit(X_train_standardized, y_train)
 
 # Make predictions on the test set
-y_pred_dt = dt_model.predict(X_test)
+y_pred_dt = dt_model.predict(X_test_standardized)
 
 # Evaluation of the model's performance using ROC-AUC score and Matthews Correlation Coefficient
-roc_auc = roc_auc_score(y_test, dt_model.predict_proba(X_test)[:, 1])
+roc_auc = roc_auc_score(y_test, dt_model.predict_proba(X_test_standardized)[:, 1])
 mcc = matthews_corrcoef(y_test, y_pred_dt)
 
 print("\nDecision Tree ROC-AUC Score:", roc_auc)

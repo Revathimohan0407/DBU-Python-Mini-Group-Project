@@ -7,6 +7,9 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import roc_auc_score, matthews_corrcoef, classification_report, confusion_matrix
 import os
+import seaborn as sns
+
+
 
 # Load the dataset
 # Make sure the dataset is in the same directory or provide the full path to the dataset
@@ -25,6 +28,8 @@ categorical_columns = ['Age_Group', 'Gender', 'Socioeconomic_Status', 'Peer_Infl
                        'Substance_Education', 'Community_Support', 'Media_Influence']
 df = pd.get_dummies(df, columns=categorical_columns, drop_first=True)
 
+print(df)
+
 # Define features (X) and target (y)
 X = df.drop(['Smoking_Prevalence'], axis=1)  # Features
 # Binarize `Smoking_Prevalence` target based on mean threshold
@@ -40,7 +45,7 @@ scaler = StandardScaler()
 X_train_standardized = scaler.fit_transform(X_train)
 X_test_standardized = scaler.transform(X_test)
 
-# Optional: Print to verify transformations
+# Print to verify transformations
 print("\nStandardized Training Data (first 5 rows):")
 print(pd.DataFrame(X_train_standardized, columns=X.columns).head())
 

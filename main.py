@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import roc_auc_score, matthews_corrcoef
 import seaborn as sns
 import os
 
@@ -59,4 +59,20 @@ print(pd.DataFrame(X_train_standardized, columns=X.columns).head())
 print("\nNormalized Training Data (first 5 rows):")
 print(pd.DataFrame(X_train_normalized, columns=X.columns).head())
 
+
+
+# Machine Learning: Decision Tree
+# Create and train the Decision Tree model on the training data
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train_scaled, y_train)
+
+# Make predictions on the test set
+y_pred_dt = dt_model.predict(X_test)
+
+# Evaluation of the model's performance using ROC-AUC score and Matthews Correlation Coefficient
+roc_auc = roc_auc_score(y_test, dt_model.predict_proba(X_test)[:, 1])
+mcc = matthews_corrcoef(y_test, y_pred_dt)
+
+print("\nDecision Tree ROC-AUC Score:", roc_auc)
+print("Decision Tree Matthews Correlation Coefficient (MCC):", mcc)
 

@@ -25,16 +25,6 @@ print("First 5 rows of the dataset:\n", df.head())
 # Display summary statistics for numerical columns
 print("\nSummary statistics:\n", df.describe())
 
-# Check for missing values in the dataset
-print("\nMissing values:\n", df.isnull().sum())
-
-
-
-# Data Visualization
-
-
-print(df)
-
 #preprocessing technques.
 # Check for missing values
 missing_values = df.isnull().sum()

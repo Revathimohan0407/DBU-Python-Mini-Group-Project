@@ -64,7 +64,7 @@ print(pd.DataFrame(X_train_normalized, columns=X.columns).head())
 # Machine Learning: Decision Tree
 # Create and train the Decision Tree model on the training data
 dt_model = DecisionTreeClassifier(random_state=42)
-dt_model.fit(X_train_scaled, y_train)
+dt_model.fit(X_train_standardized, y_train)
 
 # Make predictions on the test set
 y_pred_dt = dt_model.predict(X_test)

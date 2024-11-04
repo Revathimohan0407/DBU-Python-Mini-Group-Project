@@ -9,8 +9,6 @@ from sklearn.metrics import roc_auc_score, matthews_corrcoef, classification_rep
 import os
 import seaborn as sns
 
-
-
 # Load the dataset
 # Make sure the dataset is in the same directory or provide the full path to the dataset
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -48,6 +46,47 @@ X_test_standardized = scaler.transform(X_test)
 # Print to verify transformations
 print("\nStandardized Training Data (first 5 rows):")
 print(pd.DataFrame(X_train_standardized, columns=X.columns).head())
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+ 
+# Load the dataset
+df = pd.read_csv('/Users/remo/Downloads/youth_smoking_drug_data_10000_rows_expanded.csv')
+ 
+# Encode categorical columns
+label_encoder = LabelEncoder()
+df['Gender'] = label_encoder.fit_transform(df['Gender'])
+df['Age_Group'] = label_encoder.fit_transform(df['Age_Group'])
+df['Socioeconomic_Status'] = label_encoder.fit_transform(df['Socioeconomic_Status'])
+ 
+# Scale numerical columns
+scaler = StandardScaler()
+df[['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status']] = scaler.fit_transform(
+    df[['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status']]
+)
+ 
+# Visualization 1: Boxplot for Smoking Prevalence by Age Group
+plt.figure(figsize=(8, 6))
+sns.boxplot(x='Age_Group', y='Smoking_Prevalence', data=df)
+plt.title("Smoking Prevalence by Age Group")
+plt.show()
+plt.clf()
+ 
+# Visualization 2: Correlation Heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Heatmap")
+plt.show()
+plt.clf()
+ 
+# Visualization 3: Scatter Plot for Peer Influence vs Drug Experimentation by Gender
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='Peer_Influence', y='Drug_Experimentation', hue='Gender', data=df)
+plt.title("Peer Influence vs Drug Experimentation")
+plt.show()
+plt.clf()
 
 # Machine Learning: Decision Tree
 dt_model = DecisionTreeClassifier(random_state=42)

@@ -3,13 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
-from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, roc_auc_score
-
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import roc_auc_score, matthews_corrcoef
 import seaborn as sns
 import os
 
@@ -74,22 +70,16 @@ dt_model.fit(X_train_scaled, y_train)
 # Make predictions on the test set
 y_pred_dt = dt_model.predict(X_test)
 
-# Evaluation of the model's performance using confusion matrix and classification report
-print("\nDecision Tree Confusion Matrix:\n", confusion_matrix(y_test, y_pred_dt))
-print("\nDecision Tree Classification Report:\n", classification_report(y_test, y_pred_dt))
-print("Decision Tree Accuracy:", accuracy_score(y_test, y_pred_dt))
+# Evaluation of the model's performance using ROC-AUC score and Matthews Correlation Coefficient
+roc_auc = roc_auc_score(y_test, dt_model.predict_proba(X_test)[:, 1])
+mcc = matthews_corrcoef(y_test, y_pred_dt)
+
+print("\nDecision Tree ROC-AUC Score:", roc_auc)
+print("Decision Tree Matthews Correlation Coefficient (MCC):", mcc)
+
+
 
 
 print(df)
 
-<<<<<<< Updated upstream
-=======
 
-
-
-
->>>>>>> Stashed changes
-
-
-print(df)
->>>>>>> Stashed changes

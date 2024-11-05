@@ -20,27 +20,6 @@ print("\nSummary statistics:\n", df.describe())
 print("Missing values per column:")
 print(df.isnull().sum())
 
-# Visualization 1: Boxplot for Smoking Prevalence by Age Group
-plt.figure(figsize=(8, 6))
-sns.boxplot(x='Age_Group', y='Smoking_Prevalence', data=df)
-plt.title("Smoking Prevalence by Age Group")
-plt.show()
-plt.clf()
- 
-# Visualization 2: Correlation Heatmap
-plt.figure(figsize=(10, 8))
-sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
-plt.title("Correlation Heatmap")
-plt.show()
-plt.clf()
- 
-# Visualization 3: Scatter Plot for Peer Influence vs Drug Experimentation by Gender
-plt.figure(figsize=(8, 6))
-sns.scatterplot(x='Peer_Influence', y='Drug_Experimentation', hue='Gender', data=df)
-plt.title("Peer Influence vs Drug Experimentation")
-plt.show()
-plt.clf()
-
 # Convert categorical columns using one-hot encoding
 categorical_columns = ['Age_Group', 'Gender', 'Socioeconomic_Status', 'Peer_Influence', 'School_Programs', 
                        'Family_Background', 'Mental_Health', 'Access_to_Counseling', 'Parental_Supervision',

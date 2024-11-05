@@ -9,7 +9,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import roc_auc_score, matthews_corrcoef
  
 # Load the dataset (use the correct path)
-df = pd.read_csv('/Users/remo/Downloads/youth_smoking_drug_data_10000_rows_expanded.csv')
+df = pd.read_csv(r'C:\Users\dwarm\OneDrive\Documents\GitHub\DBU-Python-Mini-Group-Project\youth_smoking_drug_data_10000_rows_expanded.csv')
  
 # Data Exploration
 print("First 5 rows of the dataset:\n", df.head())
@@ -71,28 +71,26 @@ mcc = matthews_corrcoef(y_test, y_pred_dt)
  
 print("\nDecision Tree ROC-AUC Score:", roc_auc)
 print("Decision Tree Matthews Correlation Coefficient (MCC):", mcc)
-
+ 
 # Visualization 1: Box Plot for Smoking Prevalence by Age Group
 plt.figure(figsize=(8, 6))
 sns.boxplot(x='Age_Group', y='Smoking_Prevalence', data=df)
 plt.title("Smoking Prevalence by Age Group")
 plt.show()
-
-# Select a subset of features for readability
-selected_columns = ['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status', 'Peer_Influence_2',
-                    'Peer_Influence_4', 'Family_Background_2', 'Mental_Health_3', 'Community_Support_5']
-
-# Create a heatmap for the selected columns
-plt.figure(figsize=(12, 8))
-sns.heatmap(df[selected_columns].corr(), annot=True, cmap='coolwarm', fmt=".2f")
-plt.title("Correlation Heatmap (Selected Features)")
+ 
+# Visualization 2: Correlation Heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Heatmap")
 plt.show()
-
-# Plot if the columns are confirmed to be present
-plt.figure(figsize=(8, 6))
-sns.scatterplot(x='Peer_Influence_5', y='Drug_Experimentation', hue='Gender', data=df)
-plt.title("Peer Influence (Level 5) vs Drug Experimentation by Gender")
-plt.xlabel("Peer Influence (Level 5)")
-plt.ylabel("Drug Experimentation")
-plt.tight_layout()  # Adjust layout for better appearance
-plt.show()
+ 
+# Check if 'Peer_Influence' is still in the DataFrame
+if 'Peer_Influence' in df.columns:
+    # Visualization 3: Scatter Plot for Peer Influence vs Drug Experimentation by Gender
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='Peer_Influence', y='Drug_Experimentation', hue='Gender', data=df)
+    plt.title("Peer Influence vs Drug Experimentation")
+    plt.show()
+else:
+    print("Peer_Influence column not found in the DataFrame.")
+ 

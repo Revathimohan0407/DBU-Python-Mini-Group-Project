@@ -77,13 +77,17 @@ plt.figure(figsize=(8, 6))
 sns.boxplot(x='Age_Group', y='Smoking_Prevalence', data=df)
 plt.title("Smoking Prevalence by Age Group")
 plt.show()
- 
-# Visualization 2: Correlation Heatmap
-plt.figure(figsize=(10, 8))
-sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
-plt.title("Correlation Heatmap")
+
+# Select a subset of features for readability
+selected_columns = ['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status', 'Peer_Influence_2',
+                    'Peer_Influence_4', 'Family_Background_2', 'Mental_Health_3', 'Community_Support_5']
+
+# Create a heatmap for the selected columns
+plt.figure(figsize=(12, 8))
+sns.heatmap(df[selected_columns].corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Heatmap (Selected Features)")
 plt.show()
- 
+
 # Check if 'Peer_Influence' is still in the DataFrame
 if 'Peer_Influence' in df.columns:
     # Visualization 3: Scatter Plot for Peer Influence vs Drug Experimentation by Gender

@@ -68,25 +68,7 @@ X_test_standardized = scaler.transform(X_test)
 print("\nStandardized Training Data (first 5 rows):")
 print(pd.DataFrame(X_train_standardized, columns=X.columns).head())
 
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.preprocessing import StandardScaler, LabelEncoder
- 
-# Load the dataset
-df = pd.read_csv('/Users/remo/Downloads/youth_smoking_drug_data_10000_rows_expanded.csv')
- 
-# Encode categorical columns
-label_encoder = LabelEncoder()
-df['Gender'] = label_encoder.fit_transform(df['Gender'])
-df['Age_Group'] = label_encoder.fit_transform(df['Age_Group'])
-df['Socioeconomic_Status'] = label_encoder.fit_transform(df['Socioeconomic_Status'])
- 
-# Scale numerical columns
-scaler = StandardScaler()
-df[['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status']] = scaler.fit_transform(
-    df[['Smoking_Prevalence', 'Drug_Experimentation', 'Socioeconomic_Status']]
-)
+
 # Machine Learning: Decision Tree
 dt_model = DecisionTreeClassifier(random_state=42)
 dt_model.fit(X_train_standardized, y_train)

@@ -71,7 +71,7 @@ mcc = matthews_corrcoef(y_test, y_pred_dt)
  
 print("\nDecision Tree ROC-AUC Score:", roc_auc)
 print("Decision Tree Matthews Correlation Coefficient (MCC):", mcc)
- 
+
 # Visualization 1: Box Plot for Smoking Prevalence by Age Group
 plt.figure(figsize=(8, 6))
 sns.boxplot(x='Age_Group', y='Smoking_Prevalence', data=df)
@@ -88,13 +88,11 @@ sns.heatmap(df[selected_columns].corr(), annot=True, cmap='coolwarm', fmt=".2f")
 plt.title("Correlation Heatmap (Selected Features)")
 plt.show()
 
-# Check if 'Peer_Influence' is still in the DataFrame
-if 'Peer_Influence' in df.columns:
-    # Visualization 3: Scatter Plot for Peer Influence vs Drug Experimentation by Gender
-    plt.figure(figsize=(8, 6))
-    sns.scatterplot(x='Peer_Influence', y='Drug_Experimentation', hue='Gender', data=df)
-    plt.title("Peer Influence vs Drug Experimentation")
-    plt.show()
-else:
-    print("Peer_Influence column not found in the DataFrame.")
- 
+# Plot if the columns are confirmed to be present
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='Peer_Influence_5', y='Drug_Experimentation', hue='Gender', data=df)
+plt.title("Peer Influence (Level 5) vs Drug Experimentation by Gender")
+plt.xlabel("Peer Influence (Level 5)")
+plt.ylabel("Drug Experimentation")
+plt.tight_layout()  # Adjust layout for better appearance
+plt.show()
